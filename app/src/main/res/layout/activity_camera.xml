@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.the_game.housingcamview.CameraActivity">
+
+  <FrameLayout
+      android:id="@+id/camera_preview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
+
+  <HorizontalScrollView
+      android:id="@+id/flat_world_holder"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/flat_world"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentLeft="true"
+          android:src="@android:drawable/star_big_on"/>
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="false"
+          android:layout_alignParentRight="true"
+          android:layout_marginLeft="200dp"
+          android:src="@android:drawable/star_big_off"/>
+
+    </RelativeLayout>
+  </HorizontalScrollView>
+
+  <TextView
+      android:id="@+id/tv"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+
+
+</RelativeLayout>
