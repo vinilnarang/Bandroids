@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.the_game.housingcamview.FlatStructures.BuyFlatStructure;
+import com.example.the_game.housingcamview.FlatStructures.BuyFlatStructure2;
 import com.example.the_game.housingcamview.FlatStructures.PgFlatStructure;
 import com.example.the_game.housingcamview.FlatStructures.RentFlatStructure;
 import com.google.gson.Gson;
@@ -22,12 +23,14 @@ import java.util.ArrayList;
 public class DisplayFlatsList extends AppCompatActivity {
 
   ListView listView;
+  Gson gson;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_flats_list);
     listView = (ListView) findViewById(R.id.listView);
+    gson = new Gson();
     Intent intent = getIntent();
     String service = intent.getStringExtra("service");
     String result = intent.getStringExtra("result");
@@ -39,6 +42,21 @@ public class DisplayFlatsList extends AppCompatActivity {
     switch (service) {
       case "buy":
         ArrayList<BuyFlatStructure> buyFlatStructureArrayList = parseBuyData(result);
+        ArrayList<BuyFlatStructure2> buyFlatStructureArrayList2 = new ArrayList<BuyFlatStructure2>();
+        for (int i = 0; i < buyFlatStructureArrayList.size(); i++) {
+          BuyFlatStructure buyFlatStructure = buyFlatStructureArrayList.get(i);
+          double latitude = Double.parseDouble(buyFlatStructure.location_coordinates.split(",")[0]);
+          double longitude = Double.parseDouble(buyFlatStructure.location_coordinates.split(",")[1]);
+          BuyFlatStructure2 buyFlatStructure2 = new BuyFlatStructure2(
+              buyFlatStructure.formatted_price,
+              buyFlatStructure.type,
+              buyFlatStructure.title,
+              latitude,
+              longitude,
+              buyFlatStructure.name,
+              buyFlatStructure.id);
+          buyFlatStructureArrayList2.add(buyFlatStructure2);
+        }
         break;
       case "rent":
         ArrayList<RentFlatStructure> rentFlatStructureArrayList = parseRentData(result);
@@ -53,7 +71,6 @@ public class DisplayFlatsList extends AppCompatActivity {
     try {
       JSONObject jsonObject = new JSONObject(result);
       JSONArray jsonArray = jsonObject.getJSONArray("hits");
-      Gson gson = new Gson();
       ArrayList<BuyFlatStructure> list = new ArrayList<BuyFlatStructure>();
       for (int i = 0; i < jsonArray.length(); i++) {
         String str = jsonArray.getString(i);
@@ -75,10 +92,7 @@ public class DisplayFlatsList extends AppCompatActivity {
       JSONObject jsonObject = new JSONObject(result);
       JSONObject jsonObject1 = jsonObject.getJSONObject("hits");
 
-      //String result1 = jsonObject.getString("hits");
-      //JSONObject jsonObject1 = new JSONObject(result1);
       JSONArray jsonArray = jsonObject1.getJSONArray("hits");
-      Gson gson = new Gson();
       ArrayList<RentFlatStructure> list = new ArrayList<RentFlatStructure>();
       for (int i = 0; i < jsonArray.length(); i++) {
         String str = jsonArray.getJSONObject(i).getString("_source");
@@ -98,10 +112,7 @@ public class DisplayFlatsList extends AppCompatActivity {
       JSONObject jsonObject = new JSONObject(result);
       JSONObject jsonObject1 = jsonObject.getJSONObject("hits");
 
-      //String result1 = jsonObject.getString("hits");
-      //JSONObject jsonObject1 = new JSONObject(result1);
       JSONArray jsonArray = jsonObject1.getJSONArray("hits");
-      Gson gson = new Gson();
       ArrayList<PgFlatStructure> list = new ArrayList<PgFlatStructure>();
       for (int i = 0; i < jsonArray.length(); i++) {
         String str = jsonArray.getJSONObject(i).getString("_source");
