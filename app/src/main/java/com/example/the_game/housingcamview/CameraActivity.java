@@ -257,10 +257,10 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
     propertyListView.addView(propView);
     //((TextView) propView.findViewById(R.id.property_name)).setText(idx + " " + propertyStructure.getDisplayName());
 
-    ((TextView) propView.findViewById(R.id.property_name)).setText(Html.fromHtml("<a href=\"" + propertyStructure.getURL() + "\">" + idx + propertyStructure.getDisplayName() + "</a>"));
+    ((TextView) propView.findViewById(R.id.property_name)).setText(Html.fromHtml("<a style=\"text-decoration:none\" href=\"" + propertyStructure.getURL() + "\">" + idx + ".  " + propertyStructure.getDisplayName() + "</a>"));
     ((TextView) propView.findViewById(R.id.property_name)).setMovementMethod(LinkMovementMethod.getInstance());
-    ((TextView) propView.findViewById(R.id.property_price)).setText(propertyStructure.getDisplayPrice());
-    ((TextView) propView.findViewById(R.id.property_distance)).setText(propertyStructure.getDistance() + "");
+    ((TextView) propView.findViewById(R.id.property_price)).setText("Rs." + propertyStructure.getDisplayPrice());
+    ((TextView) propView.findViewById(R.id.property_distance)).setText(String.format("%.2f", propertyStructure.getDistance() / 1000) + " Km");
     double angleRatio = propertyStructure.getAngleRatio();
     float leftMargin = 0;
     if (angleRatio < 0.5) {
@@ -269,10 +269,11 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
       leftMargin = (float) (flatWorldWidth / 2 * (angleRatio));
     }
     dotView.setTranslationX(leftMargin - propView.getWidth() / 2);
-    dotView.setTranslationY((float) ((1 - propertyStructure.getDistance() / maxDistance) * screenHeight));
-    dotView.findViewById(R.id.image_dot).setScaleX(1.1f - (float) (propertyStructure.getDistance() / maxDistance));
-    dotView.findViewById(R.id.image_dot).setScaleY(1.1f - (float) (propertyStructure.getDistance() / maxDistance));
-
+    dotView.setTranslationY((float) ((1 - propertyStructure.getDistance() / maxDistance) * screenHeight * 1.2));
+    dotView.setScaleX(1.5f - (float) (propertyStructure.getDistance() / maxDistance));
+    dotView.setScaleY(1.5f - (float) (propertyStructure.getDistance() / maxDistance));
+    dotView.findViewById(R.id.red_circle).setAlpha((float) (propertyStructure.getDistance() / maxDistance));
+    dotView.findViewById(R.id.green_circle).setAlpha((float) (1 - propertyStructure.getDistance() / maxDistance));
     Log.d(propertyStructure.getDisplayName(), propertyStructure.getAngleRatio() + " " + leftMargin);
     //propView.setLayoutParams((new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
     /*

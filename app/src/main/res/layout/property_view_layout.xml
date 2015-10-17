@@ -1,28 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="#33000000"
+              android:background="@drawable/home_card_bg"
               android:orientation="vertical">
 
-  <TextView
-      android:id="@+id/property_name"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Name"
-      android:textColor="@android:color/white"/>
 
-  <TextView
-      android:id="@+id/property_price"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="price"
-      android:textColor="@android:color/white"/>
+  <LinearLayout
+      android:id="@+id/card_view"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_gravity="right"
+      android:layout_marginTop="5dp"
+      android:background="@drawable/search_fixed_item_border"
+      android:orientation="vertical">
 
-  <TextView
-      android:id="@+id/property_distance"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="distance"
-      android:textColor="@android:color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="14dp"
+        android:paddingTop="17dp">
+
+      <TextView
+          android:id="@+id/property_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="#80000000"
+          android:textSize="15sp"
+          android:textStyle="bold"/>
+
+      <TextView
+          android:id="@+id/property_distance"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="#8000A032"
+          android:textSize="8dp"
+          />
+
+      <RelativeLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/property_price"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="11dp"
+            android:lineSpacingExtra="6dp"
+            android:textColor="#80000000"/>
+
+      </RelativeLayout>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#08000000"/>
+
+  </LinearLayout>
+
+
 </LinearLayout>

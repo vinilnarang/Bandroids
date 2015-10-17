@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="3dp">
 
-  <ImageView
-      android:id="@+id/image_dot"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:scaleType="fitXY"
-      android:src="@android:drawable/star_on"
-      android:layout_centerInParent="true"/>
+  <View
+      android:id="@+id/green_circle"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:background="@drawable/circle_bg_green"/>
+
+  <View
+      android:id="@+id/red_circle"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:background="@drawable/circle_bg_red"/>
 
   <TextView
       android:id="@+id/tag_dot"
-      android:text="3"
-      android:background="#88ffffff"
-      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
       android:layout_centerInParent="true"
       android:gravity="center"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:shadowColor="#dedede"
+      android:shadowRadius="1"
+      android:text="3"
+      android:textColor="#ffffff"
+      android:textStyle="bold"
+      />
 </RelativeLayout>
