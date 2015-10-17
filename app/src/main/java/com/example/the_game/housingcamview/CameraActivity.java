@@ -251,7 +251,7 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
 
     //((TextView) dotView.findViewById(R.id.tag_dot)).setText(idx + "");
     TextView dotTextView = (TextView) dotView.findViewById(R.id.tag_dot);
-    dotTextView.setText(Html.fromHtml("<a href=\"" + propertyStructure.getURL() + "\">" + idx + "</a>"));
+    dotTextView.setText(Html.fromHtml("<a style=\"font-color:#ffffff\" href=\"" + propertyStructure.getURL() + "\">" + idx + "</a>"));
     dotTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
     propertyListView.addView(propView);
@@ -275,19 +275,7 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
     dotView.findViewById(R.id.red_circle).setAlpha((float) (propertyStructure.getDistance() / maxDistance));
     dotView.findViewById(R.id.green_circle).setAlpha((float) (1 - propertyStructure.getDistance() / maxDistance));
     Log.d(propertyStructure.getDisplayName(), propertyStructure.getAngleRatio() + " " + leftMargin);
-    //propView.setLayoutParams((new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
-    /*
-    ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(100, 100);
-    layoutParams.leftMargin = 200;
-    layoutParams.bottomMargin = 400;
-    //propView.setLayoutParams(layoutParams);
-    //flatWorld.addView(propView, layoutParams);
-    propView.setLayoutParams(layoutParams);
 
-    Button btn = new Button(this);
-    btn.setText(propertyStructure.getDisplayName());
-    btn.setPadding(10, 0, 0, 0);*/
-    // btn.setBackgroundColor(Integer.parseInt("#32000000"));
   }
 
   @Override
