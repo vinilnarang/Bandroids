@@ -232,7 +232,7 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
     } else {
       scrollAmount = (int) (flatWorldMinusSwByTwo * (1 + azimuthDeg / 180f)) % flatWorldWidth;
     }
-
+    //if ()
     tv.setText("azimuth " + String.valueOf(azimuthDeg) + "scroll amount" + scrollAmount + "pitch " + String.valueOf(pitch) + "roll " + String.valueOf(power));
     flatWorldHolder.smoothScrollTo(scrollAmount, flatWorldHolder.getScrollY());
 
