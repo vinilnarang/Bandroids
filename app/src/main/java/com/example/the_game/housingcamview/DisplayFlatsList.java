@@ -63,6 +63,7 @@ public class DisplayFlatsList extends AppCompatActivity {
         break;
     }
     startActivity(intent);
+    this.finish();
 
   }
 

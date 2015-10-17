@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -326,7 +325,7 @@ public class GPSTracker extends Service implements LocationListener {
   public void onLocationChanged(Location location) {
     this.latitude = location.getLatitude();
     this.longitude = location.getLongitude();
-    Toast.makeText(mContext,"Please try now!",Toast.LENGTH_LONG).show();
+    //Toast.makeText(mContext,"Please try now!",Toast.LENGTH_LONG).show();
     stopUsingGPS();
   }
 
