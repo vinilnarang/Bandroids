@@ -21,4 +21,14 @@ public class PgFlatStructure extends PropertyStructure {
   public double getLongitude() {
     return longitude;
   }
+
+  @Override
+  public String getDisplayName() {
+    return seo_title;
+  }
+
+  @Override
+  public String getDisplayPrice() {
+    return formatted_min_rent;
+  }
 }

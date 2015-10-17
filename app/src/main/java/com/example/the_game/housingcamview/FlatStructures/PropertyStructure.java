@@ -27,5 +27,7 @@ abstract public class PropertyStructure {
 
   abstract public double getLatitude() ;
   abstract public double getLongitude();
+  abstract public String getDisplayName();
+  abstract public String getDisplayPrice();
 
 }

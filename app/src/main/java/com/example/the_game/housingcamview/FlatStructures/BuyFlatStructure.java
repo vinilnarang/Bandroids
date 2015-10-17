@@ -25,6 +25,16 @@ public class BuyFlatStructure extends PropertyStructure {
     double lon=Double.parseDouble(latlon[1]);
     return lon;
   }
+
+  @Override
+  public String getDisplayName() {
+    return name;
+  }
+
+  @Override
+  public String getDisplayPrice() {
+    return formatted_price;
+  }
 }
 
 

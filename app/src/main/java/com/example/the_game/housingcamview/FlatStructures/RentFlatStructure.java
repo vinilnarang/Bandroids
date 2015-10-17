@@ -34,6 +34,16 @@ public class RentFlatStructure extends PropertyStructure {
     return longitude;
   }
 
+  @Override
+  public String getDisplayName() {
+    return apartment_type;
+  }
+
+  @Override
+  public String getDisplayPrice() {
+    return formatted_rent;
+  }
+
   public int getId() {
     return id;
   }
