@@ -257,7 +257,7 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
     propertyListView.addView(propView);
     //((TextView) propView.findViewById(R.id.property_name)).setText(idx + " " + propertyStructure.getDisplayName());
 
-    ((TextView) propView.findViewById(R.id.property_name)).setText("" + idx + ". " + Html.fromHtml("<a style=\"text-decoration:none\" href=\"" + propertyStructure.getURL() + "\">" + propertyStructure.getDisplayName() + "</a>"));
+    ((TextView) propView.findViewById(R.id.property_name)).setText(Html.fromHtml("<a style=\"text-decoration:none\" href=\"" + propertyStructure.getURL() + "\">" + idx + ". " + propertyStructure.getDisplayName() + "</a>"));
     ((TextView) propView.findViewById(R.id.property_name)).setMovementMethod(LinkMovementMethod.getInstance());
     ((TextView) propView.findViewById(R.id.property_price)).setText("Rs." + propertyStructure.getDisplayPrice());
     ((TextView) propView.findViewById(R.id.property_distance)).setText(String.format("%.2f", propertyStructure.getDistance() / 1000) + " Km");
