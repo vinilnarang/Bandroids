@@ -96,11 +96,11 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
         preview.addView(mPreview);
         Camera.Parameters p = camera.getParameters();
         //double thetaV = Math.toRadians(p.getVerticalViewAngle());
-        double thetaH = Math.toRadians(p.getHorizontalViewAngle());
+        double thetaH = p.getHorizontalViewAngle();
         screenWidth = getScreenWidthUsingDisplayMetrics();
-          screenHeight = getScreenHeightUsingDisplayMetrics();
-            //flatWorldWidth = (int) (360 / thetaH * screenWidth);
-            flatWorldWidth = (int) (4 * screenWidth);
+        screenHeight = getScreenHeightUsingDisplayMetrics();
+        flatWorldWidth = (int) (360 / thetaH * screenWidth);
+        //flatWorldWidth = (int) (4 * screenWidth);
         flatWorld = (RelativeLayout) findViewById(R.id.flat_world);
         flatWorld.post(new Runnable() {
           @Override

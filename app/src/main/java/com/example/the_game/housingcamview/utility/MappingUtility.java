@@ -31,7 +31,7 @@ public class MappingUtility {
       PropertyStructure current = iterator.next();
       double lat = current.getLatitude();
       double lon = current.getLongitude();
-      double angle = getAngle(new Points(lat, lon), origin);
+      double angle = getAngle(origin, new Points(lat, lon));
       current.setAngle(angle);
     }
   }
