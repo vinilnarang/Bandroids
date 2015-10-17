@@ -8,6 +8,8 @@ import com.example.the_game.housingcamview.GPSTracker;
 import com.example.the_game.housingcamview.beans.Points;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 /**
@@ -18,10 +20,24 @@ public class MappingUtility {
   public static final int R = 6371;
   private boolean currentLocationInProgress = false;
 
+
   public static void updateAngleAndDistance(ArrayList<? extends PropertyStructure> arrayList, Points origin) {
 
     updateAngle(arrayList, origin);
     updateDistance(arrayList, origin);
+    sortWithDistance(arrayList);
+  }
+
+  private static void sortWithDistance(ArrayList<? extends PropertyStructure> arrayList) {
+
+    Collections.sort(arrayList, new Comparator<PropertyStructure>() {
+      @Override
+      public int compare(PropertyStructure lhs, PropertyStructure rhs) {
+        if(lhs.getDistance()>rhs.getDistance())
+          return 1;
+        else return -1;
+      }
+    });
   }
 
   public static void updateAngle(ArrayList<? extends PropertyStructure> arrayList, Points origin) {
@@ -89,7 +105,5 @@ public class MappingUtility {
       return coordinates;
     }
   }
-
-
 
 }
