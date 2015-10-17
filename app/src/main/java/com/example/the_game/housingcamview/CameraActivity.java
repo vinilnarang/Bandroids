@@ -191,6 +191,10 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
 
   }
 
+  public void addViewToFlatWorld(){
+
+  }
+
   @Override
   protected void onResume() {
     super.onResume();
