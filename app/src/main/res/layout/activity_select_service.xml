@@ -1,34 +1,118 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="com.example.the_game.housingcamview.SelectService">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg_overlay_buy"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context="com.example.the_game.housingcamview.SelectService">
 
-  <Button
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Rent"
-      android:id="@+id/rentButton"
-      android:layout_centerVertical="true"
-      android:layout_centerHorizontal="true"/>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1">
 
-  <Button
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Buy"
-      android:id="@+id/buyButton"
-      android:layout_above="@+id/rentButton"
-      android:layout_centerHorizontal="true"/>
+    <ImageButton
+        android:id="@+id/buyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:clickable="true"/>
 
-  <Button
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="PG/HOSTELS"
-      android:id="@+id/pgButton"
-      android:layout_below="@+id/rentButton"
-      android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+    <com.example.the_game.housingcamview.utility.RobotoRegularTextView
+        android:id="@+id/buyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="BUY"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:clickable="true"/>
+    <View
+        android:id="@+id/buyHighlighter"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_below="@+id/buyTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="1dp"
+        android:background="@color/scroller_divider">
+    </View>
+
+  </RelativeLayout>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1">
+
+    <ImageButton
+        android:id="@+id/rentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:clickable="true"/>
+
+    <com.example.the_game.housingcamview.utility.RobotoRegularTextView
+        android:id="@+id/rentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="RENT"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:clickable="true"/>
+    <View
+        android:id="@+id/rentHighlighter"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_below="@+id/rentTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="1dp"
+        android:background="@color/scroller_divider">
+    </View>
+
+  </RelativeLayout>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1">
+
+    <ImageButton
+        android:id="@+id/pgButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:clickable="true"/>
+
+    <com.example.the_game.housingcamview.utility.RobotoRegularTextView
+        android:id="@+id/pgTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="PG/HOSTELS"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:clickable="true"/>
+
+    <View
+        android:id="@+id/pgHighlighter"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_below="@+id/pgTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="1dp"
+        android:background="@color/scroller_divider">
+    </View>
+  </RelativeLayout>
+
+</LinearLayout>
