@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.menu_main, menu);
     return true;
   }
@@ -36,6 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     if (id == R.id.action_settings) {
       return true;
     }
+    if (id == R.id.action_selectService) {
+      Intent intent = new Intent(this, SelectService.class);
+      startActivity(intent);
+      return true;
+    }
 
     return super.onOptionsItemSelected(item);
   }
@@ -44,12 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   public void onClick(View view) {
     switch (view.getId()) {
       case R.id.cam_button:
-        openCamera();
+        openServiceList();
     }
   }
 
-  private void openCamera() {
-    Intent intent = new Intent(this, CameraActivity.class);
+  private void openServiceList() {
+    Intent intent = new Intent(this, SelectService.class);
     startActivity(intent);
   }
 }

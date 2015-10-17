@@ -1,6 +1,7 @@
 package com.example.the_game.housingcamview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Sensor;
@@ -11,12 +12,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.the_game.housingcamview.FlatStructures.PropertyData;
+import com.example.the_game.housingcamview.FlatStructures.PropertyStructure;
+
+import java.util.ArrayList;
 
 public class CameraActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -32,12 +39,30 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
   private HorizontalScrollView flatWorldHolder;
   private int flatWorldWidth;
   private TextView tv;
-  private double screenWidth;
+  private double screenWidth, screenHeight;
+  private RelativeLayout flatWorld = null;
+  ArrayList<? extends PropertyStructure> propertyList = new ArrayList<>();
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_camera);
+
+    Intent intent = getIntent();
+    String service = intent.getStringExtra("service");
+
+
+    switch (service) {
+      case "buy":
+        propertyList = PropertyData.getInstance().getBuyProperties();
+        break;
+      case "rent":
+        propertyList = PropertyData.getInstance().getRentProperties();
+        break;
+      case "pg":
+        propertyList = PropertyData.getInstance().getPgProperties();
+        break;
+    }
 
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -73,18 +98,27 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
         //double thetaV = Math.toRadians(p.getVerticalViewAngle());
         double thetaH = Math.toRadians(p.getHorizontalViewAngle());
         screenWidth = getScreenWidthUsingDisplayMetrics();
-        flatWorldWidth = (int) (360 / thetaH * screenWidth);
-        final RelativeLayout flatWorld = (RelativeLayout) findViewById(R.id.flat_world);
-
+          screenHeight = getScreenHeightUsingDisplayMetrics();
+            //flatWorldWidth = (int) (360 / thetaH * screenWidth);
+            flatWorldWidth = (int) (4 * screenWidth);
+        flatWorld = (RelativeLayout) findViewById(R.id.flat_world);
         flatWorld.post(new Runnable() {
           @Override
           public void run() {
             final FrameLayout.LayoutParams flatWorldLayoutParams = (FrameLayout.LayoutParams) flatWorld.getLayoutParams();
             flatWorldLayoutParams.width = flatWorldWidth;
             flatWorld.setLayoutParams(flatWorldLayoutParams);
+            plotProperties(propertyList);
+
           }
         });
       }
+    }
+  }
+
+  private void plotProperties(ArrayList<? extends PropertyStructure> propertyList) {
+    for (PropertyStructure property : propertyList) {
+      addViewToFlatWorld(property);
     }
   }
 
@@ -110,9 +144,19 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
    */
   public int getScreenWidthUsingDisplayMetrics() {
     DisplayMetrics displaymetrics = new DisplayMetrics();
-    WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+    WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
     wm.getDefaultDisplay().getMetrics(displaymetrics);
     return displaymetrics.widthPixels;
+  }
+
+  /**
+   * gets screen height in pixels, Application Context should be used
+   */
+  public int getScreenHeightUsingDisplayMetrics() {
+    DisplayMetrics displaymetrics = new DisplayMetrics();
+    WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+    wm.getDefaultDisplay().getMetrics(displaymetrics);
+    return displaymetrics.heightPixels;
   }
 
   @Override
@@ -191,8 +235,34 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
 
   }
 
-  public void addViewToFlatWorld(){
+  public void addViewToFlatWorld(PropertyStructure propertyStructure) {
+    View propView = getLayoutInflater().inflate(R.layout.property_view_layout, flatWorld, false);
+    flatWorld.addView(propView);
+    ((TextView) propView.findViewById(R.id.property_name)).setText(propertyStructure.getDisplayName());
+    ((TextView) propView.findViewById(R.id.property_price)).setText(propertyStructure.getDisplayPrice());
+    ((TextView) propView.findViewById(R.id.property_distance)).setText(propertyStructure.getDistance() + "");
+    double angleRatio = propertyStructure.getAngleRatio();
+    float leftMargin = 0;
+    if (angleRatio < 0.5) {
+      leftMargin = (int) (((angleRatio + 1) * flatWorldWidth / 2) % flatWorldWidth);
+    } else {
+      leftMargin = (float) (flatWorldWidth / 2 * (angleRatio));
+    }
+    propView.setTranslationX(leftMargin - propView.getWidth() / 2);
+    Log.d(propertyStructure.getDisplayName(), propertyStructure.getAngleRatio() + " " + leftMargin);
+    //propView.setLayoutParams((new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
+    /*
+    ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(100, 100);
+    layoutParams.leftMargin = 200;
+    layoutParams.bottomMargin = 400;
+    //propView.setLayoutParams(layoutParams);
+    //flatWorld.addView(propView, layoutParams);
+    propView.setLayoutParams(layoutParams);
 
+    Button btn = new Button(this);
+    btn.setText(propertyStructure.getDisplayName());
+    btn.setPadding(10, 0, 0, 0);*/
+    // btn.setBackgroundColor(Integer.parseInt("#32000000"));
   }
 
   @Override
