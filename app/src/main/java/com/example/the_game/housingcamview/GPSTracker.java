@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,9 +23,8 @@ import java.util.Locale;
 /**
  * Create this Class from tutorial :
  * http://www.androidhive.info/2012/07/android-gps-location-manager-tutorial
- *
+ * <p/>
  * For Geocoder read this : http://stackoverflow.com/questions/472313/android-reverse-geocoding-getfromlocation
- *
  */
 
 public class GPSTracker extends Service implements LocationListener {
@@ -123,9 +123,7 @@ public class GPSTracker extends Service implements LocationListener {
           updateGPSCoordinates();
         }
       }
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       //e.printStackTrace();
       Log.e(TAG, "Impossible to connect to LocationManager", e);
     }
@@ -143,6 +141,7 @@ public class GPSTracker extends Service implements LocationListener {
 
   /**
    * GPSTracker latitude getter and setter
+   *
    * @return latitude
    */
   public double getLatitude() {
@@ -155,6 +154,7 @@ public class GPSTracker extends Service implements LocationListener {
 
   /**
    * GPSTracker longitude getter and setter
+   *
    * @return
    */
   public double getLongitude() {
@@ -183,11 +183,11 @@ public class GPSTracker extends Service implements LocationListener {
    * Stop using GPS listener
    * Calling this method will stop using GPS in your app
    */
-  /*public void stopUsingGPS() {
+  public void stopUsingGPS() {
     if (locationManager != null) {
       locationManager.removeUpdates(GPSTracker.this);
     }
-  }*/
+  }
 
   /**
    * Function to show settings alert dialog
@@ -206,8 +206,7 @@ public class GPSTracker extends Service implements LocationListener {
     alertDialog.setPositiveButton(R.string.action_settings, new DialogInterface.OnClickListener() {
 
       @Override
-      public void onClick(DialogInterface dialog, int which)
-      {
+      public void onClick(DialogInterface dialog, int which) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         mContext.startActivity(intent);
       }
@@ -217,8 +216,7 @@ public class GPSTracker extends Service implements LocationListener {
     alertDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 
       @Override
-      public void onClick(DialogInterface dialog, int which)
-      {
+      public void onClick(DialogInterface dialog, int which) {
         dialog.cancel();
       }
     });
@@ -228,6 +226,7 @@ public class GPSTracker extends Service implements LocationListener {
 
   /**
    * Get list of address by latitude and longitude
+   *
    * @return null or List<Address>
    */
   public List<Address> getGeocoderAddress(Context context) {
@@ -254,6 +253,7 @@ public class GPSTracker extends Service implements LocationListener {
 
   /**
    * Try to get AddressLine
+   *
    * @return null or addressLine
    */
   public String getAddressLine(Context context) {
@@ -271,6 +271,7 @@ public class GPSTracker extends Service implements LocationListener {
 
   /**
    * Try to get Locality
+   *
    * @return null or locality
    */
   public String getLocality(Context context) {
@@ -281,14 +282,14 @@ public class GPSTracker extends Service implements LocationListener {
       String locality = address.getLocality();
 
       return locality;
-    }
-    else {
+    } else {
       return null;
     }
   }
 
   /**
    * Try to get Postal Code
+   *
    * @return null or postalCode
    */
   public String getPostalCode(Context context) {
@@ -306,6 +307,7 @@ public class GPSTracker extends Service implements LocationListener {
 
   /**
    * Try to get CountryName
+   *
    * @return null or postalCode
    */
   public String getCountryName(Context context) {
@@ -322,6 +324,10 @@ public class GPSTracker extends Service implements LocationListener {
 
   @Override
   public void onLocationChanged(Location location) {
+    this.latitude = location.getLatitude();
+    this.longitude = location.getLongitude();
+    Toast.makeText(mContext,"Please try now!",Toast.LENGTH_LONG).show();
+    stopUsingGPS();
   }
 
   @Override

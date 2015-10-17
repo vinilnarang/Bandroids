@@ -2,6 +2,7 @@ package com.example.the_game.housingcamview.utility;
 
 import android.content.Context;
 
+import com.example.the_game.housingcamview.FlatStructures.PropertyData;
 import com.example.the_game.housingcamview.FlatStructures.PropertyStructure;
 import com.example.the_game.housingcamview.GPSTracker;
 import com.example.the_game.housingcamview.beans.Points;
@@ -15,6 +16,7 @@ import java.util.Iterator;
 public class MappingUtility {
 
   public static final int R = 6371;
+  private boolean currentLocationInProgress = false;
 
   public static void updateAngleAndDistance(ArrayList<? extends PropertyStructure> arrayList, Points origin) {
 
@@ -38,12 +40,16 @@ public class MappingUtility {
 
   public static void updateDistance(ArrayList<? extends PropertyStructure> arrayList, Points origin) {
 
+    double maxDist = 0;
     for (PropertyStructure current : arrayList) {
       double lat = current.getLatitude();
       double lon = current.getLongitude();
       double dis = getDistance(new Points(lat, lon), origin);
       current.setDistance(dis);
+      if (dis > maxDist)
+        maxDist = dis;
     }
+    PropertyData.maxDist = maxDist;
   }
 
 
@@ -83,4 +89,7 @@ public class MappingUtility {
       return coordinates;
     }
   }
+
+
+
 }
