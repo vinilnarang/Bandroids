@@ -79,7 +79,7 @@ public class PolygonUUIDFetchAsyncTask extends AsyncTask<UrlServiceParams, Void,
     String url = "";
     switch (service) {
       case "buy":
-        url = "https://buy.housing.com/api/v1/buy/index/filter?sort_key=relevance&poly=" + uuid + "&results_per_page=2";
+        url = "https://buy.housing.com/api/v1/buy/index/filter?sort_key=relevance&poly=" + uuid + "&results_per_page=1000";
         break;
       case "rent":
         url = "https://rails.housing.com//api/v3/rent/filter?poly=" + uuid + "&poly_q=true&details=true&sort_key=relevance&sort_order=ASC";

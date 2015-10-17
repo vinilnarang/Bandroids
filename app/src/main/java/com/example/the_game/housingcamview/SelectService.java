@@ -42,7 +42,7 @@ public class SelectService extends AppCompatActivity implements View.OnClickList
   public void getFlatsList(String service) {
     double[] coordinates = MappingUtility.getLocationCoords(this);
     if (coordinates[0] == (0) && coordinates[1] == 0) {
-      Toast.makeText(this, "OOPS, Something happened. Please try later!", Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "OOPS, Unable to fetch location. Please try later!", Toast.LENGTH_SHORT).show();
       return;
     }
 
@@ -53,7 +53,7 @@ public class SelectService extends AppCompatActivity implements View.OnClickList
     String url = "https://regions.housing.com/api/v2/polygon/near_me/?lat=" + coordinates[0] + "&lng=" + coordinates[1];
     try {
       PolygonUUIDFetchAsyncTask polygonUUIDFetchAsyncTask = new PolygonUUIDFetchAsyncTask(this);
-      polygonUUIDFetchAsyncTask.execute(new UrlServiceParams(url,service));
+      polygonUUIDFetchAsyncTask.execute(new UrlServiceParams(url, service));
     } catch (IOException e) {
       Toast.makeText(this, "Error fetching data! Please try again in sometime.", Toast.LENGTH_LONG).show();
       e.printStackTrace();
@@ -61,7 +61,6 @@ public class SelectService extends AppCompatActivity implements View.OnClickList
     }
     return;
   }
-
 
 
 }

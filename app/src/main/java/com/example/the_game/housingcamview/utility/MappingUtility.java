@@ -16,6 +16,7 @@ import java.util.Iterator;
 public class MappingUtility {
 
   public static final int R = 6371;
+  private boolean currentLocationInProgress = false;
 
   public static void updateAngleAndDistance(ArrayList<? extends PropertyStructure> arrayList, Points origin) {
 
@@ -39,16 +40,16 @@ public class MappingUtility {
 
   public static void updateDistance(ArrayList<? extends PropertyStructure> arrayList, Points origin) {
 
-    double maxDist=0;
+    double maxDist = 0;
     for (PropertyStructure current : arrayList) {
       double lat = current.getLatitude();
       double lon = current.getLongitude();
       double dis = getDistance(new Points(lat, lon), origin);
       current.setDistance(dis);
-      if(dis>maxDist)
-        maxDist=dis;
+      if (dis > maxDist)
+        maxDist = dis;
     }
-    PropertyData.maxDist=maxDist;
+    PropertyData.maxDist = maxDist;
   }
 
 
@@ -88,4 +89,7 @@ public class MappingUtility {
       return coordinates;
     }
   }
+
+
+
 }
