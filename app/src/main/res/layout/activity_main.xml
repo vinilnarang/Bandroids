@@ -9,9 +9,32 @@
                 tools:context=".MainActivity">
 
   <ImageView
+      android:id="@+id/look_up"
+      android:layout_width="110dp"
+      android:layout_height="110dp"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      android:src="@drawable/look_up"/>
+
+  <ImageView
       android:id="@+id/cam_button"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/look_up"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
       android:src="@drawable/image"/>
+
+  <com.example.the_game.housingcamview.utility.RobotoRegularTextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/cam_button"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="20dp"
+      android:text="Tap above to explore!"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:textColor="@color/black"/>
 
 </RelativeLayout>
