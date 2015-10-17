@@ -251,13 +251,13 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
 
     //((TextView) dotView.findViewById(R.id.tag_dot)).setText(idx + "");
     TextView dotTextView = (TextView) dotView.findViewById(R.id.tag_dot);
-    dotTextView.setText(Html.fromHtml("<a style=\"font-color:#ffffff\" href=\"" + propertyStructure.getURL() + "\">" + idx + "</a>"));
+    dotTextView.setText(Html.fromHtml("<a style=\"font-color:#ffffff;text-decoration:none\" href=\"" + propertyStructure.getURL() + "\">" + idx + "</a>"));
     dotTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
     propertyListView.addView(propView);
     //((TextView) propView.findViewById(R.id.property_name)).setText(idx + " " + propertyStructure.getDisplayName());
 
-    ((TextView) propView.findViewById(R.id.property_name)).setText(Html.fromHtml("<a style=\"text-decoration:none\" href=\"" + propertyStructure.getURL() + "\">" + idx + ".  " + propertyStructure.getDisplayName() + "</a>"));
+    ((TextView) propView.findViewById(R.id.property_name)).setText("" + idx + ". " + Html.fromHtml("<a style=\"text-decoration:none\" href=\"" + propertyStructure.getURL() + "\">" + propertyStructure.getDisplayName() + "</a>"));
     ((TextView) propView.findViewById(R.id.property_name)).setMovementMethod(LinkMovementMethod.getInstance());
     ((TextView) propView.findViewById(R.id.property_price)).setText("Rs." + propertyStructure.getDisplayPrice());
     ((TextView) propView.findViewById(R.id.property_distance)).setText(String.format("%.2f", propertyStructure.getDistance() / 1000) + " Km");

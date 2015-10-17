@@ -23,10 +23,11 @@
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
       android:gravity="center"
-      android:shadowColor="#dedede"
+      android:shadowColor="#FFFFFF"
       android:shadowRadius="1"
       android:text="3"
       android:textColor="#ffffff"
+      android:textColorLink="@color/white"
       android:textStyle="bold"
       />
 </RelativeLayout>
