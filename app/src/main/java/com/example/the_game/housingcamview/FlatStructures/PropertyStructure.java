@@ -33,5 +33,6 @@ abstract public class PropertyStructure implements Serializable {
   abstract public double getLongitude();
   abstract public String getDisplayName();
   abstract public String getDisplayPrice();
+  abstract public String getURL();
 
 }

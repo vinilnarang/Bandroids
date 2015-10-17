@@ -24,12 +24,14 @@ public class RentFlatStructure extends PropertyStructure {
   public void setApartment_type(String apartment_type) {
     this.apartment_type = apartment_type;
   }
-@Override
+
+  @Override
   public double getLatitude() {
 
     return latitude;
   }
-@Override
+
+  @Override
   public double getLongitude() {
     return longitude;
   }
@@ -56,9 +58,19 @@ public class RentFlatStructure extends PropertyStructure {
     return apartment_type;
   }
 
+  public String getCanonical_url() {
+    return canonical_url;
+  }
+
+  @Override
+  public String getURL() {
+    return getCanonical_url();
+  }
+
   double latitude;
   double longitude;
   int id;
   String formatted_rent;
   String apartment_type;
+  String canonical_url;
 }

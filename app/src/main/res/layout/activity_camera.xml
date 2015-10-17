@@ -1,57 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.example.the_game.housingcamview.CameraActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              tools:context="com.example.the_game.housingcamview.CameraActivity">
 
-  <FrameLayout
-      android:id="@+id/camera_preview"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      />
+  <RelativeLayout
+      android:layout_width="0dp"
+      android:layout_height="fill_parent"
+      android:layout_weight="7.5">
 
-  <HorizontalScrollView
-      android:id="@+id/flat_world_holder"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:id="@+id/flat_world"
-        android:layout_width="100dp"
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient">
+        />
 
-      <Button
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerInParent="true"
-          android:text="Hi"/>
+    <HorizontalScrollView
+        android:id="@+id/flat_world_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_alignParentLeft="true"
-          android:layout_centerHorizontal="true"
-          android:src="@android:drawable/star_big_on"/>
+      <RelativeLayout
+          android:id="@+id/flat_world"
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/gradient">
 
-      <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentLeft="false"
-          android:layout_alignParentRight="true"
-          android:layout_centerHorizontal="true"
-          android:layout_marginLeft="200dp"
+      </RelativeLayout>
+    </HorizontalScrollView>
 
-          android:src="@android:drawable/star_big_off"/>
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+  </RelativeLayout>
+  <ScrollView
+      android:layout_width="0dp"
+      android:layout_weight="2.5"
+      android:layout_height="fill_parent"
+      >
+    <LinearLayout
+        android:id="@+id/property_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"></LinearLayout>
+  </ScrollView>
 
-    </RelativeLayout>
-  </HorizontalScrollView>
 
-  <TextView
-      android:id="@+id/tv"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
-
-
-</RelativeLayout>
+</LinearLayout>

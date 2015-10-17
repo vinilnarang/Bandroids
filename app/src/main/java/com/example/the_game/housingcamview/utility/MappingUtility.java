@@ -49,7 +49,7 @@ public class MappingUtility {
       if (dis > maxDist)
         maxDist = dis;
     }
-    PropertyData.maxDist = maxDist;
+    PropertyData.maxDistance = maxDist;
   }
 
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PropertyData {
 
   private static PropertyData instance;
-  public static double maxDist;
+  public static double maxDistance;
 
   public static synchronized void init() {
     if (instance == null) {

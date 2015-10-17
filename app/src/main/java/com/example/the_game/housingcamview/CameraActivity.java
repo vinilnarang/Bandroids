@@ -10,12 +10,15 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +45,8 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
   private double screenWidth, screenHeight;
   private RelativeLayout flatWorld = null;
   ArrayList<? extends PropertyStructure> propertyList = new ArrayList<>();
+  private LinearLayout propertyListView;
+  private double maxDistance = PropertyData.getInstance().maxDistance;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,7 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
 
     flatWorldHolder = (HorizontalScrollView) findViewById(R.id.flat_world_holder);
     tv = (TextView) findViewById(R.id.tv);
+    propertyListView = (LinearLayout) findViewById(R.id.property_list);
 
     sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -117,8 +123,10 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
   }
 
   private void plotProperties(ArrayList<? extends PropertyStructure> propertyList) {
+    int i = 1;
     for (PropertyStructure property : propertyList) {
-      addViewToFlatWorld(property);
+      addViewToFlatWorld(property, i);
+      i++;
     }
   }
 
@@ -235,10 +243,22 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
 
   }
 
-  public void addViewToFlatWorld(PropertyStructure propertyStructure) {
+  public void addViewToFlatWorld(PropertyStructure propertyStructure, int idx) {
     View propView = getLayoutInflater().inflate(R.layout.property_view_layout, flatWorld, false);
-    flatWorld.addView(propView);
-    ((TextView) propView.findViewById(R.id.property_name)).setText(propertyStructure.getDisplayName());
+    //flatWorld.addView(propView);
+    View dotView = getLayoutInflater().inflate(R.layout.prop_dot_view, flatWorld, false);
+    flatWorld.addView(dotView);
+
+    //((TextView) dotView.findViewById(R.id.tag_dot)).setText(idx + "");
+    TextView dotTextView = (TextView) dotView.findViewById(R.id.tag_dot);
+    dotTextView.setText(Html.fromHtml("<a href=\"" + propertyStructure.getURL() + "\">" + idx + "</a>"));
+    dotTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
+    propertyListView.addView(propView);
+    //((TextView) propView.findViewById(R.id.property_name)).setText(idx + " " + propertyStructure.getDisplayName());
+
+    ((TextView) propView.findViewById(R.id.property_name)).setText(Html.fromHtml("<a href=\"" + propertyStructure.getURL() + "\">" + idx + propertyStructure.getDisplayName() + "</a>"));
+    ((TextView) propView.findViewById(R.id.property_name)).setMovementMethod(LinkMovementMethod.getInstance());
     ((TextView) propView.findViewById(R.id.property_price)).setText(propertyStructure.getDisplayPrice());
     ((TextView) propView.findViewById(R.id.property_distance)).setText(propertyStructure.getDistance() + "");
     double angleRatio = propertyStructure.getAngleRatio();
@@ -248,7 +268,11 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
     } else {
       leftMargin = (float) (flatWorldWidth / 2 * (angleRatio));
     }
-    propView.setTranslationX(leftMargin - propView.getWidth() / 2);
+    dotView.setTranslationX(leftMargin - propView.getWidth() / 2);
+    dotView.setTranslationY((float) ((1 - propertyStructure.getDistance() / maxDistance) * screenHeight));
+    dotView.findViewById(R.id.image_dot).setScaleX(1.1f - (float) (propertyStructure.getDistance() / maxDistance));
+    dotView.findViewById(R.id.image_dot).setScaleY(1.1f - (float) (propertyStructure.getDistance() / maxDistance));
+
     Log.d(propertyStructure.getDisplayName(), propertyStructure.getAngleRatio() + " " + leftMargin);
     //propView.setLayoutParams((new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
     /*
@@ -289,5 +313,6 @@ public class CameraActivity extends AppCompatActivity implements SensorEventList
     float degFloat = degrees / 90f * 100f;
     return (int) degFloat;
   }
+
 
 }

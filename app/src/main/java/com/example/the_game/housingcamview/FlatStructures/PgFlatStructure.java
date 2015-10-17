@@ -1,7 +1,5 @@
 package com.example.the_game.housingcamview.FlatStructures;
 
-import android.os.Parcel;
-
 /**
  * Created by the_game on 17/10/15.
  */
@@ -13,6 +11,7 @@ public class PgFlatStructure extends PropertyStructure {
   int number_of_housemates;
   String formatted_min_rent;
   String seo_title;
+  String canonical_url;
 
   @Override
   public double getLatitude() {
@@ -34,5 +33,13 @@ public class PgFlatStructure extends PropertyStructure {
     return formatted_min_rent;
   }
 
+  public String getCanonical_url() {
+    return canonical_url;
+  }
+
+  @Override
+  public String getURL() {
+    return getCanonical_url();
+  }
 
 }
